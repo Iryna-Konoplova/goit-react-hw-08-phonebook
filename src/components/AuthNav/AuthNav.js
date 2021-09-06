@@ -1,14 +1,11 @@
+// Модули
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const styles = {
-  link: {
-    display: 'inline-block',
-    textDecoration: 'none',
-    padding: 12,
-    fontWeight: 700,
-    color: '#2A363B',
-  },
+// Стили
+import styles from '../AuthNav/AuthNav.module.css';
+
+const style = {
   activeLink: {
     color: '#E84A5F',
   },
@@ -20,16 +17,16 @@ export default function AuthNav() {
       <NavLink
         to="/register"
         exact
-        style={styles.link}
-        activeStyle={styles.activeLink}
+        className={styles.link}
+        activeStyle={style.activeLink}
       >
         Регистрация
       </NavLink>
       <NavLink
         to="/login"
         exact
-        style={styles.link}
-        activeStyle={styles.activeLink}
+        className={styles.link}
+        activeStyle={style.activeLink}
       >
         Логин
       </NavLink>

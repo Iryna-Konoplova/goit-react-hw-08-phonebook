@@ -5,6 +5,9 @@ import { authOperations } from '../redux/auth';
 const styles = {
   form: {
     width: 320,
+    marginLeft: 'auto',
+    marginTop: '100px',
+    marginRight: 'auto',
   },
   label: {
     display: 'flex',
@@ -38,8 +41,6 @@ export default function LoginView() {
 
   return (
     <div>
-      <h1>Страница логина</h1>
-
       <form onSubmit={handleSubmit} style={styles.form} autoComplete="off">
         <label style={styles.label}>
           Почта

@@ -11,13 +11,14 @@ const styles = {
     fontWeight: 500,
     fontSize: 48,
     textAlign: 'center',
+    color: 'rgb(231, 40, 158)',
   },
 };
 
 const HomeView = () => (
   <div style={styles.container}>
     <h1 style={styles.title}>
-      Добро пожаловать в приложение - телефонная книга
+      Добро пожаловать в приложение <br /> телефонная книга
     </h1>
   </div>
 );
