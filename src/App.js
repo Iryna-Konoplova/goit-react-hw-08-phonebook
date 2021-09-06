@@ -1,68 +1,49 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
+import { useEffect, Suspense, lazy } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Switch } from 'react-router-dom';
 import AppBar from './components/AppBar';
-import ContactsView from './views/ContactsView';
-import HomeView from './views/HomeView';
-import RegisterView from './views/RegisterView';
-import LoginView from './views/LoginView';
 import Container from './components/Container';
-import { authOperations } from './redux/auth';
+import PrivateRoute from './components/PrivateRoute';
+import PublicRoute from './components/PublicRoute';
+import { authOperations, authSelectors } from './redux/auth';
+import PageLoader from './components/Loader';
+
+const HomeView = lazy(() => import('./views/HomeView'));
+const RegisterView = lazy(() => import('./views/RegisterView'));
+const LoginView = lazy(() => import('./views/LoginView'));
+const ContactsView = lazy(() => import('./views/ContactsView'));
+// const UploadView = lazy(() => import('./views/UploadView'));
 
 export default function App() {
   const dispatch = useDispatch();
+  // const isFetchingCurrentUser = useSelector(authSelectors.getIsFetchingCurrent);
 
   useEffect(() => {
     dispatch(authOperations.fetchCurrentUser());
   }, [dispatch]);
 
   return (
+    // isFetchingCurrentUser && (
     <Container>
       <AppBar />
 
       <Switch>
-        <Route exact path="/" component={HomeView} />
-        <Route path="/register" component={RegisterView} />
-        <Route path="/login" component={LoginView} />
-        <Route path="/todos" component={ContactsView} />
+        <Suspense fallback={<PageLoader />}>
+          <PublicRoute exact path="/">
+            <HomeView />
+          </PublicRoute>
+          <PublicRoute exact path="/register" restricted>
+            <RegisterView />
+          </PublicRoute>
+          <PublicRoute exact path="/login" redirectTo="/todos" restricted>
+            <LoginView />
+          </PublicRoute>
+          <PrivateRoute path="/contacts" redirectTo="/login">
+            <ContactsView />
+          </PrivateRoute>
+        </Suspense>
       </Switch>
     </Container>
+    // )
   );
 }
-
-// // Модули
-// import { useSelector, useDispatch } from "react-redux";
-// import { useEffect } from 'react';
-
-// // Компоненты
-// import ContactForm from './components/ContactForm';
-// import ContactList from './components/ContactList';
-// import Filter from './components/Filter';
-// import contactsOperations from './redux/contacts/contacts-operations';
-// import Loader from "react-loader-spinner";
-// import {isContactLoading } from './redux/contacts/contacts-selectors';
-
-// // Стили
-// import styles from './App.module.css';
-
-// const App = () => {
-//   const isLoadingContacts = useSelector(isContactLoading);
-//   const dispatch = useDispatch();
-
-//   useEffect(() => {
-//     dispatch(contactsOperations.fetchContacts());
-//   }, [dispatch]);
-
-//   return (
-//     <div className={styles.container}>
-//       <h1 className={styles.title}>Phonebook</h1>
-//       <ContactForm  />
-//       <h2 className={styles.subtitle}>Contacts</h2>
-//       <Filter />
-//        {isLoadingContacts && <Loader type="ThreeDots" color="#00BFFF" height={80} width={80} />}
-//       <ContactList />
-//     </div>
-//   );
-// }
-
-// export default App;
