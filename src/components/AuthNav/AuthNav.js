@@ -7,7 +7,7 @@ import styles from '../AuthNav/AuthNav.module.css';
 
 const style = {
   activeLink: {
-    color: '#E84A5F',
+    color: 'rgb(231, 40, 158)',
   },
 };
 

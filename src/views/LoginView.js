@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { authOperations } from '../redux/auth';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 const styles = {
   form: {
@@ -12,7 +14,12 @@ const styles = {
   label: {
     display: 'flex',
     flexDirection: 'column',
-    marginBottom: 15,
+    marginBottom: 25,
+  },
+  button: {
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
 };
 
@@ -42,7 +49,18 @@ export default function LoginView() {
   return (
     <div>
       <form onSubmit={handleSubmit} style={styles.form} autoComplete="off">
-        <label style={styles.label}>
+        <TextField
+          id="outlined-basic"
+          label="Почта"
+          variant="outlined"
+          size="small"
+          style={styles.label}
+          type="email"
+          name="email"
+          value={email}
+          onChange={handleChange}
+        />
+        {/* <label style={styles.label}>
           Почта
           <input
             type="email"
@@ -50,9 +68,21 @@ export default function LoginView() {
             value={email}
             onChange={handleChange}
           />
-        </label>
+        </label> */}
 
-        <label style={styles.label}>
+        <TextField
+          id="outlined-basic"
+          label="Пароль"
+          variant="outlined"
+          size="small"
+          style={styles.label}
+          type="password"
+          name="password"
+          value={password}
+          onChange={handleChange}
+        />
+
+        {/* <label style={styles.label}>
           Пароль
           <input
             type="password"
@@ -60,9 +90,18 @@ export default function LoginView() {
             value={password}
             onChange={handleChange}
           />
-        </label>
+        </label> */}
 
-        <button type="submit">Войти</button>
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          style={styles.button}
+        >
+          Войти
+        </Button>
+
+        {/* <button type="submit">Войти</button> */}
       </form>
     </div>
   );

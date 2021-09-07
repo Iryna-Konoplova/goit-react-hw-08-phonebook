@@ -1,6 +1,7 @@
 .container {
   display: flex;
   align-items: center;
+  padding-right: 18px;
 }
 
 .name {
@@ -10,8 +11,8 @@
   font-size: 22px;
 }
 
-.button {
+/* .button {
+  display: block;
   margin-right: 18px;
   font-size: 22px;
-  border-radius: 5px;
-}
+} */

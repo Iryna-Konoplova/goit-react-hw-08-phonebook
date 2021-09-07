@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { authOperations } from '../redux/auth';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 const styles = {
   form: {
@@ -12,7 +14,12 @@ const styles = {
   label: {
     display: 'flex',
     flexDirection: 'column',
-    marginBottom: 15,
+    marginBottom: 25,
+  },
+  button: {
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
 };
 
@@ -46,12 +53,35 @@ export default function RegisterView() {
   return (
     <div>
       <form onSubmit={handleSubmit} style={styles.form} autoComplete="off">
-        <label style={styles.label}>
+        <TextField
+          id="outlined-basic"
+          label="Имя"
+          variant="outlined"
+          size="small"
+          style={styles.label}
+          type="text"
+          name="name"
+          value={name}
+          onChange={handleChange}
+        />
+        {/* <label style={styles.label}>
           Имя
           <input type="text" name="name" value={name} onChange={handleChange} />
-        </label>
+        </label> */}
 
-        <label style={styles.label}>
+        <TextField
+          id="outlined-basic"
+          label="Почта"
+          variant="outlined"
+          size="small"
+          style={styles.label}
+          type="email"
+          name="email"
+          value={email}
+          onChange={handleChange}
+        />
+
+        {/* <label style={styles.label}>
           Почта
           <input
             type="email"
@@ -59,9 +89,21 @@ export default function RegisterView() {
             value={email}
             onChange={handleChange}
           />
-        </label>
+        </label> */}
 
-        <label style={styles.label}>
+        <TextField
+          id="outlined-basic"
+          label="Пароль"
+          variant="outlined"
+          size="small"
+          style={styles.label}
+          type="password"
+          name="password"
+          value={password}
+          onChange={handleChange}
+        />
+
+        {/* <label style={styles.label}>
           Пароль
           <input
             type="password"
@@ -69,9 +111,17 @@ export default function RegisterView() {
             value={password}
             onChange={handleChange}
           />
-        </label>
+        </label> */}
 
-        <button type="submit">Зарегистрироваться</button>
+        {/* <button type="submit">Зарегистрироваться</button> */}
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          style={styles.button}
+        >
+          Зарегистрироваться
+        </Button>
       </form>
     </div>
   );
